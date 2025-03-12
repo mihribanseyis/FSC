@@ -9,7 +9,7 @@ The Flux-sum coupling (FSC) method is based on the linear fractional programming
 ## **Run Flux-sum coupling**
 **To reproduce the results presented in the paper run the following scripts**
 - `pFBA.m`: Calculates the flux sum of metabolites under various genetic and environmental perturbations. The metabolic model `iML1515` of *E. coli* is used in this step. Genetic and environmental perturbations are adjusted as described by Ishii et al. `met_EIs.xlsx` Includes the experimental values of metabolite concentrations and is used in this step to assess the accuracy of the flux sum in estimating these concentrations.
-- `FScoupling.m`: Perform FSC analysis on metabolic models to identify coupled metabolite pairs and classify metabolite pairs into fully coupled, partially coupled, directionally coupled, or uncoupled categories. (iML1515, iMM904, and AraCore models are used in this step)
+- `FScoupling.m`: Perform FSC analysis on metabolic models to identify coupled metabolite pairs. (iML1515, iMM904, and AraCore models are used in this step)
 
 
 ## REFERENCES
