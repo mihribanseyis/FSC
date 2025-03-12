@@ -128,12 +128,16 @@ for eix=1:114
     end
 end
 
-%extracting the flux sums for measured metabolites
-%removing the _c,_e,_p from met names
-corrl.mets = cell(m, 1);
-for fli=1:m
-    met_cur = split(model.mets(fli),'_');
-    corrl.mets{fli} = met_cur{1};
+% Initialize corrl.mets with original metabolite names
+corrl.mets = model.mets;
+
+% Remove _c, _p, _e and __D, __L at the end of metabolite names
+for fli = 1:length(model.mets)
+    % First remove compartment suffixes (_c, _p, _e)
+    corrl.mets{fli} = regexprep(model.mets{fli}, '_(c|p|e)$', '');
+    
+    % Then remove stereoisomers __D and __L
+    corrl.mets{fli} = regexprep(corrl.mets{fli}, '__[DL]$', '');
 end
 
 corrl.sums=zeros(114,27);
