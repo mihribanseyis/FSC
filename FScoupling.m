@@ -1,7 +1,7 @@
 %initCobraToolbox(false)
 %FScoupling function
 function [mins maxs couplings] = FScoupling(model)
-%model=convertToIrreversible(model);
+model=convertToIrreversible(model);
 [m,r]=size(model.S);
 
 mins = zeros(m,m);
@@ -50,31 +50,6 @@ for i=1:m
                 maxs(i,j) = -fval;
             else
                 maxs(i,j) = NaN;
-            end
-        end
-    end
-end
-
-%coupling classification
-for ix=1:m
-    for jx=1:m
-        if ix~=jx
-            % uncoupled - 0
-            if mins(ix,jx) == 0 && maxs(ix,jx)>10000
-                couplings(ix,jx) = 0;
-            % fully coupled - 1
-            %elseif mins(ix,jx) == maxs(ix,jx) && maxs(ix,jx)>0
-            elseif abs(mins(ix,jx)-maxs(ix,jx))<0.001 && mins(ix,jx)>0
-                couplings(ix,jx) = 1;
-            % partially coupled - 2  maxs ~= +Inf ?
-            elseif mins(ix,jx)>0 && maxs(ix,jx)>0 && mins(ix,jx)~=maxs(ix,jx)
-                couplings(ix,jx) = 2;
-            % directionally (i->j) coupled - 3  maxs ~= +Inf ?
-            elseif mins(ix,jx)==0 && maxs(ix,jx)>0 && maxs(ix,jx)<10000
-                couplings(ix,jx) = 3;
-            % directionally (j->i) coupled - 4 
-            elseif mins(ix,jx)>0 && maxs(ix,jx) > 10000
-                couplings(ix,jx) = 4;
             end
         end
     end
